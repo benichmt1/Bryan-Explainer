@@ -8,26 +8,39 @@ app = Flask(__name__)
 @app.route('/slackpedia', methods=['post'])
 def slackpedia():
     query = request.values.get('text')
-    result = check_query(query)
+    result = get_query_result(query)
 
     return Response(result, content_type='charset=utf-8; text/plain')
 
 
-def check_query(query):
+def get_query_result(query):
     try:
         result = wikipedia.summary(query)
+        return get_found_response(result)
+
     except wikipedia.exceptions.DisambiguationError as error:
-        return suggest_queries(error.options)
+        return get_suggested_response(error.options)
 
-    return result
+    except wikipedia.exceptions.PageError as error:
+        return get_notfound_response(query)
 
 
-def suggest_queries(options):
+def get_found_response(result):
+    header_text = ":satisfied: Found it!\n"
+
+
+def get_suggested_response(options):
+    header_text = ":grin: Hi Buddy! Sorry, but you must be a little more precise: \n{}"
     suggested_queries = get_suggested_options(options, 5)
-    suggested_response = "You must be a little more precise \n{}".format(
-        get_suggested_string(suggested_queries))
+    suggested_response = header_text.format(get_suggested_string(suggested_queries))
 
     return suggested_response
+
+
+def get_notfound_response(query):
+    header_text = ":sweat: Well, that's awkward. I couldn't find definition for: {}."
+
+    return header_text.format(query)
 
 
 def get_suggested_options(result, max_length):
@@ -38,14 +51,13 @@ def get_suggested_options(result, max_length):
 
 def get_suggested_string(query):
     suggested = ''
-    bullet_icon = ' :black_small_square:'
 
     for element in query:
-        suggested += "{} {}\n".format(bullet_icon, element)
+        suggested += "\t{}\n".format(element)
 
     return suggested
 
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+    # port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=5000, debug=True)
