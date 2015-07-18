@@ -1,15 +1,16 @@
-from flask import Flask
+import os
+from flask import Flask, request, Response
 import wikipedia
 
 app = Flask(__name__)
 
 
-@app.route('/')
-@app.route('/<query>')
-def index(query=''):
+@app.route('/slackpedia', methods=['post'])
+def slackpedia():
+    query = request.values.get('text')
     result = check_query(query)
 
-    return result
+    return Response(result, content_type='charset=utf-8; text/plain')
 
 
 def check_query(query):
@@ -46,4 +47,5 @@ def get_suggested_string(query):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
