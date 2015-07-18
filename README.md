@@ -3,6 +3,9 @@
 Quick way to search for wikipedia's definition, now in slack! This buddy will tell you everything you want to know (as long as he can find it on wikipedia).
 
 
+![](http://i.imgur.com/ozDu2je.gif)
+
+
 ## Usage
 
 From any Slack channel, just type `/slackpedia [search term]`. The definition will be visible only to you.
