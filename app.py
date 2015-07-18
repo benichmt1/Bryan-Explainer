@@ -26,7 +26,9 @@ def get_query_result(query):
 
 
 def get_found_response(result):
-    header_text = ":satisfied: Found it!\n"
+    header_text = ":satisfied: Found it!\n {}"
+
+    return header_text.format(result)
 
 
 def get_suggested_response(options):
@@ -59,5 +61,5 @@ def get_suggested_string(query):
 
 
 if __name__ == "__main__":
-    # port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
