@@ -20,7 +20,6 @@ From any Slack channel, just type `/slackpedia [search term]`. The definition wi
     - Description: `Quick way to search for wikipedia's definition.`
     - Usage hint: `[search term]`
   - Descriptive Label: `Search Wikipedia`
-  - 
 
 ## Deploy to Heroku
 
