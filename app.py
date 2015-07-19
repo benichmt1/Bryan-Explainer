@@ -46,9 +46,7 @@ def get_notfound_response(query):
 
 
 def get_suggested_options(result, max_length):
-    result = result[:max_length]
-
-    return result
+    return result[:max_length]
 
 
 def get_suggested_string(query):
