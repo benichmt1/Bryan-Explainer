@@ -4,7 +4,7 @@ import wikipedia
 
 app = Flask(__name__)
 
-SLACKPEDIA_BOT_DEBUG = True
+SLACKPEDIA_BOT_DEBUG = False
 
 
 @app.route('/slackpedia', methods=['post'])
