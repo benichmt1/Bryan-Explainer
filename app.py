@@ -4,6 +4,8 @@ import wikipedia
 
 app = Flask(__name__)
 
+SLACKPEDIA_BOT_DEBUG = True
+
 
 @app.route('/slackpedia', methods=['post'])
 def slackpedia():
@@ -23,6 +25,9 @@ def get_query_result(query):
 
     except wikipedia.exceptions.PageError as error:
         return get_notfound_response(query)
+
+    except wikipedia.exceptions.WikipediaException as error:
+        return get_emptyquery_response()
 
 
 def get_found_response(result):
@@ -45,6 +50,9 @@ def get_notfound_response(query):
     return header_text.format(query)
 
 
+def get_emptyquery_response():
+    return "You must give me a term to search Wikipedia for!"
+
 def get_suggested_options(result, max_length):
     return result[:max_length]
 
@@ -60,4 +68,4 @@ def get_suggested_string(query):
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port, debug=SLACKPEDIA_BOT_DEBUG)
