@@ -30,4 +30,4 @@ From any Slack channel, just type `/slackpedia [search term]`. The definition wi
 
 ## Contributing
 
-- Please use the [issue tracker](https://github.com/karan/slack-overflow/issues) to report any bugs or file feature requests.
+- Please use the [issue tracker](https://github.com/oskarcieslik/Slackpedia/issues) to report any bugs or file feature requests.
