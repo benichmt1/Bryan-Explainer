@@ -1,0 +1,6 @@
+{
+  "name": "Slackpedia",
+  "description": "Quick way to search for wikipedia's definition, now in slack!",
+  "repository": "https://github.com/oskarcieslik/Slackpedia",
+  "keywords": ["python", "slack", "wikipedia"]
+}
