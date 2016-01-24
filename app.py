@@ -53,6 +53,7 @@ def get_notfound_response(query):
 def get_emptyquery_response():
     return "You must give me a term to search Wikipedia for!"
 
+
 def get_suggested_options(result, max_length):
     return result[:max_length]
 
